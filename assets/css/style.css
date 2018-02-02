@@ -1,0 +1,56 @@
+body {
+  padding-top: 70px;
+}
+
+#websiteDetails {
+  margin-top: -30px !important;
+}
+
+#btnSignUp {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .form-inline .form-control {
+    width: 100%;
+  }
+}
+
+#login-dp {
+  min-width: 250px;
+  padding: 14px 14px 0;
+  overflow: hidden;
+}
+
+#login-dp .help-block {
+  font-size: 12px
+}
+
+#login-dp .bottom {
+  border-top: 1px solid #ddd;
+  clear: both;
+  padding: 14px;
+}
+
+#login-dp .social-buttons {
+  margin: 12px 0
+}
+
+#login-dp .social-buttons a {
+  width: 49%;
+}
+
+#login-dp .form-group {
+  margin-bottom: 10px;
+}
+
+@media(max-width:768px) {
+  #login-dp {
+    background-color: inherit;
+    color: #fff;
+  }
+  #login-dp .bottom {
+    background-color: inherit;
+    border-top: 0 none;
+  }
+}
