@@ -2,8 +2,8 @@
   session_start();
   $get_root = "/SideProjects/SocialMedia";
 
-  if(isset($_SESSION['login_user'])) {
-    header("location: index.php");
+  if (isset($_SESSION['logged_in'])) {
+      header("location: index.php");
   }
 ?>
 
@@ -43,9 +43,12 @@
           </button>
           <a class="navbar-brand" href="<?php echo $get_root;?>">Social Media Site</a>
         </div>
-        <?php if(isset($_SESSION['login_user'])) { ?>
+        <?php if (isset($_SESSION['logged_in'])) {
+    ?>
 
-        <?php } else { ?>
+        <?php
+} else {
+        ?>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -84,6 +87,7 @@
             </li>
           </ul>
         </div><!--/.navbar-collapse -->
-        <?php } ?>
+        <?php
+    } ?>
       </div>
     </nav>
