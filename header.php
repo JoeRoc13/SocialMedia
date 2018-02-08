@@ -35,20 +35,20 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="<?php echo $get_root;?>">Social Media Site</a>
+          <h1 id="session"><?php var_dump($_SESSION); ?></h1>
         </div>
-        <?php if (isset($_SESSION['logged_in'])) {
-    ?>
-
-        <?php
-} else {
-        ?>
+        <?php if (isset($_SESSION['userData'])) { ?>
+          <div id="navbar" class="navbar-collapse collapse">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-anchor"></i> Profile <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#"><i class="fa fa-envelope"></i> Edit Profile</a></li>
+                <li><a href="#"><i class="fa fa-comments"></i> Sign Out</a></li>
+              </ul>
+            </li>
+          </div>
+        <?php } else { ?>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -64,11 +64,11 @@
                       <form data-toggle="validator" data-focus="false" class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="formSignIn">
                         <div class="form-group">
                           <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                          <input type="email" class="form-control" id="email" placeholder="Email address" name="email" required>
+                          <input type="email" class="form-control" id="login_email" placeholder="Email address" name="login_email" required>
                         </div>
                         <div class="form-group">
                           <label class="sr-only" for="exampleInputPassword2">Password</label>
-                          <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                          <input type="password" class="form-control" id="login_password" placeholder="Password" name="login_password" required>
                           <div class="help-block text-right"><a href="">Forget the password?</a></div>
                         </div>
                         <div class="form-group">

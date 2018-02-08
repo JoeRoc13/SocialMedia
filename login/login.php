@@ -1,25 +1,27 @@
  <?php
+session_start();
 
 $response = array();
 
 if (!empty($_POST)) {
-    include('../includes/dbconnect.php');
+  if ($_SERVER['HTTP_HOST'] == "localhost") {
+    require_once($_SERVER['DOCUMENT_ROOT']."/SideProjects/SocialMedia/classes/Account.class.php");
+  } else {
+    require_once($_SERVER['DOCUMENT_ROOT']."/classes/Account.class.php");
+  }
 
-    $query = $handler->query("SELECT * FROM users WHERE EMAIL = '" . $_POST['email'] . "'");
+  $account = new \JRocaberte\Account();
 
-    if ($query->rowCount() > 0) {
-        $r = $query->fetch(PDO::FETCH_ASSOC);
-        if ($_POST['password'] == $r['PASSWORD']) {
-            $response = array("success" => true);
-            $query = $handler->prepare("UPDATE users SET LASTLOGGEDIN = ? WHERE EMAIL = '" . $_POST['email'] . "'");
-            $query->execute(array(date("Y-m-d H:i:s")));
-            $_SESSION['logged_in'] = true;
-        } else {
-            $response = array("success" => false, "message" => "Incorrect email or password");
-        }
-    } else {
-        $response = array("success" => false, "message" => "Email not on file");
-    }
+  $loginCheck = $account->Login($_POST);
+
+  if($loginCheck["success"]) {
+    $_SESSION["userData"] = $loginCheck;
+    $_SESSION["timeOfLogin"] = time();
+    $response = array("success" => true, "sesh" => $_SESSION);
+  } else {
+    $response = $loginCheck;
+  }
+
 } else {
     $response = array("success" => false, "message" => 'Blank');
 }

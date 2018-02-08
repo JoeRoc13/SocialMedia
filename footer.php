@@ -40,9 +40,11 @@
             dataType: "json",
             success: function(response) {
               if(response.success) {
-                alert("Logged in");
+                console.log(response);
+                //document.location.reload();
               } else {
                 if(response.message == "Incorrect email or password") {
+                  console.log(response);
                   console.log("Incorrect email or password");
                 } else if (response.message == "Email not on file") {
                   console.log("Email not on file");
