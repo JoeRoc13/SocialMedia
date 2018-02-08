@@ -18,7 +18,7 @@ class Account
   {
     try
     {
-      if ($_SERVER['HTTP_HOST'] == "localhost")
+      if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "localhost:8080")
       {
         require_once($_SERVER['DOCUMENT_ROOT']."/SideProjects/SocialMedia/classes/Database.class.php");
         require_once($_SERVER['DOCUMENT_ROOT']."/SideProjects/SocialMedia/includes/helpers.php");
@@ -111,10 +111,11 @@ class Account
         $hashedPassword = password_verify($password, $getData["PASSWORD"]);
         if($hashedPassword) {
           $result = array("success" => true);
+          $parsedName = split_name($getData["NAME"]);
           $sql = $this->_db->QueryWithBinds("UPDATE users SET LASTLOGGEDIN = ? WHERE EMAIL = ?", array(date("Y-m-d H:i:s"), $email));
           $sql = $this->_db->QueryWithBinds("INSERT INTO history (USERID, DATE, IP) VALUES (?, ?, ?)", array($getData["ID"], date("Y-m-d H:i:s"), $userIP));
         } else {
-          $result = array("success" => false, "message" => "Incorrect email or password", "hashedPW" => $hashedPassword, "password" => $password, "dbPass" => $getData["PASSWORD"]);
+          $result = array("success" => false, "message" => "Incorrect email or password");
         }
       } else {
         $result = array("success" => false, "message" => "Incorrect email or password");

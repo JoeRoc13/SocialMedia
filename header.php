@@ -1,10 +1,6 @@
 <?php
   session_start();
   $get_root = "/SideProjects/SocialMedia";
-
-  if (isset($_SESSION['logged_in'])) {
-      header("location: index.php");
-  }
 ?>
 
 <!DOCTYPE html>
@@ -36,17 +32,17 @@
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="<?php echo $get_root;?>">Social Media Site</a>
-          <h1 id="session"><?php var_dump($_SESSION); ?></h1>
         </div>
         <?php if (isset($_SESSION['userData'])) { ?>
           <div id="navbar" class="navbar-collapse collapse">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-anchor"></i> Profile <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><i class="fa fa-envelope"></i> Edit Profile</a></li>
-                <li><a href="#"><i class="fa fa-comments"></i> Sign Out</a></li>
-              </ul>
-            </li>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-anchor"></i> Profile <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#"> Edit Profile</a></li>
+                  <li><a href="<?php echo $get_root;?>/logout/logout.php"> Sign Out</a></li>
+                </ul>
+              </li>
           </div>
         <?php } else { ?>
         <div id="navbar" class="navbar-collapse collapse">

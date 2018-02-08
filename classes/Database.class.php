@@ -17,9 +17,11 @@ class Database
   public function __construct()
   {
     try {
-      if ($_SERVER['HTTP_HOST'] == "localhost") {
+      if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "localhost:8080")
+      {
         require_once($_SERVER['DOCUMENT_ROOT']."/SideProjects/SocialMedia/includes/config.php");
-      } else {
+      } else
+      {
         require_once($_SERVER['DOCUMENT_ROOT']."/includes/config.php");
       }
 

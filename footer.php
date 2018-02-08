@@ -40,8 +40,7 @@
             dataType: "json",
             success: function(response) {
               if(response.success) {
-                console.log(response);
-                //document.location.reload();
+                document.location.reload();
               } else {
                 if(response.message == "Incorrect email or password") {
                   console.log(response);
@@ -81,6 +80,9 @@
                   $('#error-msg').show();
                 }
               }
+            },
+            error: function(err) {
+              console.log(err.responseText);
             }
           });
         }
