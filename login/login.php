@@ -16,6 +16,7 @@ if (!empty($_POST)) {
 
   if($loginCheck["success"]) {
     $_SESSION["userData"] = $loginCheck;
+    $_SESSION["KEEP_SIGNED_IN"] = $loginCheck["keep_signed_in"];
     $_SESSION["timeOfLogin"] = time();
     $response = array("success" => true, "sesh" => $_SESSION);
   } else {

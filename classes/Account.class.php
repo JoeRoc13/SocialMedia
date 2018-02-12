@@ -104,16 +104,33 @@ class Account
       $email = $params["login_email"];
       $password = $params["login_password"];
       $userIP = get_real_ip();
+      if(isset($params["keep_signed_in"])) {
+        $keep_logged_in = $params["keep_signed_in"];
+      }
 
       $sql = $this->_db->QueryWithBinds("SELECT * FROM users WHERE EMAIL = ?", array($email));
       if($sql->rowCount() > 0) {
         $getData = $sql->fetch(PDO::FETCH_ASSOC);
         $hashedPassword = password_verify($password, $getData["PASSWORD"]);
         if($hashedPassword) {
-          $result = array("success" => true);
           $parsedName = split_name($getData["NAME"]);
           $sql = $this->_db->QueryWithBinds("UPDATE users SET LASTLOGGEDIN = ? WHERE EMAIL = ?", array(date("Y-m-d H:i:s"), $email));
+          if(isset($keep_logged_in)) {
+            $sql = $this->_db->QueryWithBinds("UPDATE users SET KEEP_SIGNED_IN = ?", array(1));
+          } else {
+            $sql = $this->_db->QueryWithBinds("UPDATE users SET KEEP_SIGNED_IN = ?", array(0));
+          }
           $sql = $this->_db->QueryWithBinds("INSERT INTO history (USERID, DATE, IP) VALUES (?, ?, ?)", array($getData["ID"], date("Y-m-d H:i:s"), $userIP));
+          $result = array(
+            "success" => true,
+            "id" => $getData["ID"],
+            "fullname" => $getData["NAME"],
+            "first_name" => $parsedName["first_name"],
+            "middle_name" => $parsedName["middle_name"],
+            "last_name" => $parsedName["last_name"],
+            "username" => $getData["USERNAME"],
+            "keep_signed_in" => $getData["KEEP_SIGNED_IN"]
+        );
         } else {
           $result = array("success" => false, "message" => "Incorrect email or password");
         }

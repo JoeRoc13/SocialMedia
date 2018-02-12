@@ -3,11 +3,10 @@
 ?>
 
 <div class="container">
-  <h2>Social Media Site Terms of Service</h2>
+  <h2>Terms of Service</h2>
   This privacy policy sets out how “[business name]” uses and protects any information that you give “[business name]” when you use this website.
   “[business name]” is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement.
   “[business name]” may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes. This policy is effective from [date].
-  <br />
   <br />
   <h3><b>What we collect</b></h3>
   We may collect the following information:

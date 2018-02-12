@@ -21,7 +21,7 @@
      }
      else if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == "localhost:8080")
      {
-       $ip = file_get_contents('http://phihag.de/ip/');
+       $ip = file_get_contents('https://api.ipify.org/');
      }
      else
      {

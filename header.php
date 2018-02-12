@@ -1,5 +1,15 @@
 <?php
   session_start();
+  // Auto sign out after 30 minutes of activity if KEEP_SIGNED_IN is not set
+  if(isset($_SESSION['KEEP_SIGNED_IN'])) {
+    if($_SESSION["KEEP_SIGNED_IN"] == false) {
+      if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+        session_unset();     // unset $_SESSION variable for the run-time
+        session_destroy();   // destroy session data in storage
+      }
+      $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+    }
+  }
   $get_root = "/SideProjects/SocialMedia";
 ?>
 
@@ -72,7 +82,7 @@
                         </div>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox"> keep me logged-in
+                            <input type="checkbox" name="keep_signed_in"> keep me logged-in
                           </label>
                         </div>
                       </form>
